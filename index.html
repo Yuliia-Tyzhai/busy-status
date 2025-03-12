@@ -15,9 +15,9 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/busy-status/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/busy-status/assets/vendor-BpbyieiF.js">
+    <link rel="modulepreload" crossorigin href="/busy-status/assets/vendor-DerMV-7v.js">
     <link rel="stylesheet" crossorigin href="/busy-status/assets/vendor-C5eb5q2q.css">
-    <link rel="stylesheet" crossorigin href="/busy-status/assets/index-CI0UIDG6.css">
+    <link rel="stylesheet" crossorigin href="/busy-status/assets/index-Cn1BN_IM.css">
   </head>
   <body>
     <main>
@@ -25,7 +25,7 @@
   <div class="hero-container container">
     <h1 class="hero-title">Live Busy status</h1>
     <p class="hero-text">
-      Busy Status Bar can integrate with desktope software and automatically
+      Busy Status Bar can integrate with desktop software and automatically
       activate when you're on a call, live on stream, recording audio or when a
       certain program is active.
     </p>
@@ -36,28 +36,50 @@
   </div>
   <div id="registration-container" style="display: none">
     <form id="registration-form" class="wt-form">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required class="wt-input" />
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="wt-input"
+          autocomplete="name"
+        />
+      </div>
 
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        required
-        class="wt-email-input"
-      />
-      <p class="wt-success-message" style="display: none; color: green">
-        Email is correct
-      </p>
-      <p class="wt-error-message" style="display: none; color: red">
-        Email is incorrect
-      </p>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="wt-email-input"
+          autocomplete="email"
+        />
+        <div class="validation-messages">
+          <p class="wt-success-message" style="display: none; color: green">
+            Email is correct
+          </p>
+          <p class="wt-error-message" style="display: none; color: red">
+            Email is incorrect
+          </p>
+        </div>
+      </div>
 
-      <label for="phone">Phone number</label>
-      <input type="text" id="phone" name="phone" class="wt-phone-input" />
+      <div class="form-group">
+        <label for="phone">Phone number</label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          class="wt-phone-input"
+          autocomplete="tel"
+        />
+      </div>
 
-      <button type="submit">Send</button>
+      <button type="submit" id="submitButton">Send</button>
     </form>
   </div>
 </section>
