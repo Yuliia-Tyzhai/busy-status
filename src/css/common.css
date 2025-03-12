@@ -2,22 +2,17 @@ body {
   font-family: 'Manrope', sans-serif;
   color: #1c1d20;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 15px;
   letter-spacing: -0.04em;
-  background-color: #1c1d20;
 }
+
 .container {
   min-width: 320px;
   max-width: 375px;
   margin: 0 auto;
   padding-left: 16px;
   padding-right: 16px;
-}
-
-.section {
-  padding-top: 32px;
-  padding-bottom: 32px;
 }
 
 img {
@@ -31,4 +26,23 @@ ol {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+h1,
+h2,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+  }
 }
