@@ -20,7 +20,9 @@ export function validateForm(form, phoneInputField) {
     !phoneInputField ||
     !intlTelInput.getInstance(phoneInputField).isValidNumber()
   ) {
-    showErrorToast('Please, write a correct phone number!');
+    showErrorToast(
+      'Please, enter a phone number in the correct format, such as +380XXXXXXXXX!'
+    );
     return false;
   }
 
