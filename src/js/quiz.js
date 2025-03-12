@@ -1,12 +1,10 @@
-import axios from 'axios';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/css/intlTelInput.css';
-import 'intl-tel-input/build/js/utils.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import axios from 'axios';
 
-let phoneInput;
-const serverURL = 'https://jsonplaceholder.typicode.com/posts';
+const serverURL = 'https://jsonplaceholder.typicode.com/posts'; // JSONPlaceholder URL
 
 const questions = [
   { question: 'Question 1', options: ['option 1', 'option 2', 'option 3'] },
@@ -84,65 +82,46 @@ formEmail.addEventListener('input', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('phoneInputField:', phoneInputField);
   if (phoneInputField) {
-    console.log('intlTelInput:', intlTelInput);
-    try {
-      phoneInput = intlTelInput(phoneInputField, {
-        initialCountry: 'ua',
-        utilsScript: 'intl-tel-input/build/js/utils.js',
-      });
-
-      console.log('phoneInput:', phoneInput);
-
-      if (phoneInput && phoneInput.getNumber) {
-        console.log(`intl-tel-input ініціалізовано: ${phoneInput}`);
-        console.log('intl-tel-input initialized');
-      } else {
-        console.error('intl-tel-input не ініціалізовано!');
-      }
-    } catch (error) {
-      console.error('Помилка при ініціалізації intlTelInput:', error);
-    }
-
-    phoneInputField.addEventListener('blur', function () {
-      setTimeout(() => {
-        if (
-          phoneInput &&
-          typeof phoneInput.getNumber === 'function' &&
-          intlTelInput.numberFormat
-        ) {
-          try {
-            const nationalFormat = phoneInput.getNumber(
-              intlTelInput.numberFormat.NATIONAL
-            );
-            const internationalFormat = phoneInput.getNumber(
-              intlTelInput.numberFormat.INTERNATIONAL
-            );
-            console.log(`Національний формат: ${nationalFormat}`);
-            console.log(`Міжнародний формат: ${internationalFormat}`);
-          } catch (error) {
-            console.error('Помилка при отриманні форматів:', error);
-          }
-        } else {
-          console.error(
-            'intl-tel-input не ініціалізовано, метод getNumber не доступний або intlTelInput.numberFormat не визначено.'
-          );
-        }
-      }, 0);
+    intlTelInput(phoneInputField, {
+      initialCountry: 'ua',
+      loadUtils: () => import('intl-tel-input/utils'),
     });
-  } else {
-    console.error('Елемент #phone не знайдено.');
   }
 });
 
 form.addEventListener('submit', async function (event) {
   event.preventDefault();
 
-  document.querySelector('button[type="submit"]').disabled = true;
-  document.querySelector('button[type="submit"]').textContent = 'Sending...';
+  const submitButton = document.getElementById('submitButton');
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+  } else {
+    return;
+  }
 
-  if (!phoneInput || !phoneInput.getNumber()) {
+  const nameInput = document.getElementById('name');
+
+  if (!nameInput.value.trim()) {
+    iziToast.error({
+      position: 'topRight',
+      theme: 'dark',
+      messageColor: 'white',
+      backgroundColor: '#ef4040',
+      message: 'Please, write your name',
+    });
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send';
+    }
+    return;
+  }
+
+  if (
+    !phoneInputField ||
+    !intlTelInput.getInstance(phoneInputField).isValidNumber()
+  ) {
     iziToast.error({
       position: 'topRight',
       theme: 'dark',
@@ -150,35 +129,21 @@ form.addEventListener('submit', async function (event) {
       backgroundColor: '#ef4040',
       message: 'Please, write a correct phone number!',
     });
-    document.querySelector('button[type="submit"]').disabled = false;
-    document.querySelector('button[type="submit"]').textContent = 'Send';
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send';
+    }
     return;
   }
 
-  const phoneNumber = phoneInput.getNumber();
-  const isValid = phoneInput.isValidNumber();
-
-  if (!isValid) {
-    iziToast.error({
-      position: 'topRight',
-      theme: 'dark',
-      messageColor: 'white',
-      backgroundColor: '#ef4040',
-      message: 'Please, write a correct phone number',
-    });
-    document.querySelector('button[type="submit"]').disabled = false;
-    document.querySelector('button[type="submit"]').textContent = 'Відправити';
-    return;
-  }
+  const phoneNumber = intlTelInput.getInstance(phoneInputField).getNumber();
 
   const formData = {
-    name: document.getElementById('name').value,
+    name: nameInput.value,
     email: formEmail.value.trim(),
     phone: phoneNumber,
     answers: answers,
   };
-
-  console.log('Формдані:', formData);
 
   try {
     await axios.post(serverURL, formData, {
@@ -191,13 +156,12 @@ form.addEventListener('submit', async function (event) {
       theme: 'dark',
       messageColor: 'white',
       backgroundColor: '#4CAF50',
-      message: 'Дані відправлено для тестування.',
+      message: 'You have successfully sent your answers!',
     });
     document.getElementById('registration-container').innerHTML =
-      '<p>Дані відправлено для тестування. Вони не зберігаються на постійній основі.</p>';
+      '<p>You have successfully sent your answers!</p>';
     form.reset();
   } catch (error) {
-    console.error('Помилка відправки даних:', error);
     iziToast.error({
       position: 'topRight',
       theme: 'dark',
@@ -209,8 +173,10 @@ form.addEventListener('submit', async function (event) {
           'Something went wrong. Please, try again!'),
     });
   } finally {
-    document.querySelector('button[type="submit"]').disabled = false;
-    document.querySelector('button[type="submit"]').textContent = 'Send';
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send';
+    }
   }
 });
 

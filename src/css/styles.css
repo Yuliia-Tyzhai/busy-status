@@ -1,2 +1,10 @@
 @import url('./common.css');
 @import url('./hero.css');
+@import url('intl-tel-input/build/css/intlTelInput.css');
+
+/* .iti {
+  --iti-path-flags-1x: url('/node_modules/intl-tel-input/build/img/flags.webp');
+  --iti-path-flags-2x: url('/node_modules/intl-tel-input/build/img/flags@2x.webp');
+  --iti-path-globe-1x: url('/node_modules/intl-tel-input/build/img/globe.webp');
+  --iti-path-globe-2x: url('/node_modules/intl-tel-input/build/img/globe@2x.webp');
+} */
