@@ -1,4 +1,4 @@
-@import url('./common.css');
-@import url('./hero.css');
 @import url('intl-tel-input/build/css/intlTelInput.css');
 @import url('izitoast/dist/css/iziToast.min.css');
+@import url('./common.css');
+@import url('./hero.css');
