@@ -6,7 +6,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 let phoneInput;
-const serverURL = 'http://localhost:3000/responses';
+const serverURL = 'https://jsonplaceholder.typicode.com/posts';
 
 const questions = [
   { question: 'Question 1', options: ['option 1', 'option 2', 'option 3'] },
@@ -181,25 +181,21 @@ form.addEventListener('submit', async function (event) {
   console.log('Формдані:', formData);
 
   try {
-    const response = await axios.post(serverURL, formData, {
+    await axios.post(serverURL, formData, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    if (response.status === 201) {
-      iziToast.success({
-        position: 'topRight',
-        theme: 'dark',
-        messageColor: 'white',
-        backgroundColor: '#4CAF50',
-        message: 'Дані успішно відправлено.',
-      });
-      document.getElementById('registration-container').innerHTML =
-        '<p>Thank you! Your data has been successfully sent.</p>';
-      form.reset();
-    } else {
-      throw new Error('Unexpected response status: ' + response.status);
-    }
+    iziToast.success({
+      position: 'topRight',
+      theme: 'dark',
+      messageColor: 'white',
+      backgroundColor: '#4CAF50',
+      message: 'Дані відправлено для тестування.',
+    });
+    document.getElementById('registration-container').innerHTML =
+      '<p>Дані відправлено для тестування. Вони не зберігаються на постійній основі.</p>';
+    form.reset();
   } catch (error) {
     console.error('Помилка відправки даних:', error);
     iziToast.error({
