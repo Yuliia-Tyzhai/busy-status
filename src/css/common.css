@@ -1,0 +1,27 @@
+body {
+  font-family: 'Manrope', sans-serif;
+  color: #1c1d20;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.04em;
+  background-color: #1c1d20;
+}
+.container {
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.section {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
