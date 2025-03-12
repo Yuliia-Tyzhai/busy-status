@@ -4,7 +4,7 @@ import 'intl-tel-input/build/css/intlTelInput.css';
 export default function initIntlTelInput(phoneInputField) {
   if (phoneInputField) {
     intlTelInput(phoneInputField, {
-      initialCountry: 'all',
+      initialCountry: 'auto',
       loadUtils: () => import('intl-tel-input/utils'),
     });
   } else {

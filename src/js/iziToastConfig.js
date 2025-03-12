@@ -6,6 +6,10 @@ export function showSuccessToast(message) {
     theme: 'dark',
     messageColor: 'green',
     message: message,
+    progressBarColor: 'green',
+    transitionIn: 'fadeIn',
+    transitionOut: 'fadeOut',
+    timeout: 3000,
   });
 }
 
@@ -15,5 +19,9 @@ export function showErrorToast(message) {
     theme: 'dark',
     messageColor: 'red',
     message: message,
+    progressBarColor: 'red',
+    transitionIn: 'fadeIn',
+    transitionOut: 'fadeOut',
+    timeout: 5000,
   });
 }
