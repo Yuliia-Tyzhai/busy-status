@@ -1,25 +1,47 @@
 import { validateEmail, validatePhoneNumber, validateName } from './utils';
-import { showErrorToast } from './iziToastConfig';
+
+export function showErrorUnderField(inputField, message) {
+  let errorMessageElement =
+    inputField.parentElement.querySelector('.error-message');
+  if (!errorMessageElement) {
+    errorMessageElement = document.createElement('div');
+    errorMessageElement.classList.add('error-message');
+    inputField.parentElement.appendChild(errorMessageElement);
+  }
+  errorMessageElement.textContent = message;
+}
+
+export function clearErrorUnderField(inputField) {
+  const errorMessageElement =
+    inputField.parentElement.querySelector('.error-message');
+  if (errorMessageElement) {
+    errorMessageElement.textContent = '';
+  }
+}
 
 export function validateForm(form, phoneInputField) {
   const nameInput = form.querySelector('#name');
   const emailInput = form.querySelector('.wt-email-input');
 
+  clearErrorUnderField(nameInput);
+  clearErrorUnderField(emailInput);
+  clearErrorUnderField(phoneInputField);
+
   const nameError = validateName(nameInput.value);
   if (nameError) {
-    showErrorToast(nameError);
+    showErrorUnderField(nameInput, nameError);
     return false;
   }
 
-  if (!validateEmail(emailInput.value.trim())) {
-    showErrorToast('Please, write a correct email (e.g., example@domain.com)');
+  const emailError = validateEmail(emailInput.value.trim());
+  if (emailError) {
+    showErrorUnderField(emailInput, emailError);
     return false;
   }
 
-  if (!phoneInputField || !validatePhoneNumber(phoneInputField)) {
-    showErrorToast(
-      'Please, enter a phone number in the correct format, such as +380XXXXXXXXX!'
-    );
+  const phoneError = validatePhoneNumber(phoneInputField);
+  if (phoneError) {
+    showErrorUnderField(phoneInputField, phoneError);
     return false;
   }
 
@@ -33,23 +55,27 @@ export function initFormValidation(form, phoneInputField) {
   nameInput.addEventListener('blur', () => {
     const nameError = validateName(nameInput.value);
     if (nameError) {
-      showErrorToast(nameError);
+      showErrorUnderField(nameInput, nameError);
+    } else {
+      clearErrorUnderField(nameInput);
     }
   });
 
   emailInput.addEventListener('blur', () => {
-    if (!validateEmail(emailInput.value.trim())) {
-      showErrorToast(
-        'Please, write a correct email (e.g., example@domain.com)'
-      );
+    const emailError = validateEmail(emailInput.value.trim());
+    if (emailError) {
+      showErrorUnderField(emailInput, emailError);
+    } else {
+      clearErrorUnderField(emailInput);
     }
   });
 
   phoneInputField.addEventListener('blur', () => {
-    if (!validatePhoneNumber(phoneInputField)) {
-      showErrorToast(
-        'Please, enter a phone number in the correct format, such as +380XXXXXXXXX!'
-      );
+    const phoneError = validatePhoneNumber(phoneInputField);
+    if (phoneError) {
+      showErrorUnderField(phoneInputField, phoneError);
+    } else {
+      clearErrorUnderField(phoneInputField);
     }
   });
 }

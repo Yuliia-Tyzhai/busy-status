@@ -2,12 +2,22 @@ import intlTelInput from 'intl-tel-input';
 
 export function validateEmail(email) {
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return emailPattern.test(email);
+  if (!emailPattern.test(email)) {
+    return 'Please, write a correct email (e.g., example@domain.com)';
+  }
+  return null;
 }
 
 export function validatePhoneNumber(phoneInputField) {
+  if (!phoneInputField) {
+    return 'Phone input field is not provided';
+  }
+
   const iti = intlTelInput.getInstance(phoneInputField);
-  return iti.isValidNumber();
+  if (!iti.isValidNumber()) {
+    return 'Please, enter a phone number in the correct format, such as +380XXXXXXXXX!';
+  }
+  return null;
 }
 
 export function validateName(name) {

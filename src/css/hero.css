@@ -107,6 +107,12 @@ label {
   outline: none;
 }
 
+.error-message {
+  color: rgb(213, 2, 2);
+  font-size: 8px;
+  margin-top: 0;
+}
+
 @media screen and (min-width: 768px) {
   .hero-section {
     background-size: auto;
@@ -166,6 +172,10 @@ label {
     padding: 16px 60px;
     margin: 24px auto 0;
   }
+
+  .error-message {
+    font-size: 12px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -195,5 +205,9 @@ label {
 
   .send-button {
     font-size: 18px;
+  }
+
+  .error-message {
+    font-size: 14px;
   }
 }
