@@ -2,10 +2,9 @@ import iziToast from 'izitoast';
 
 export function showSuccessToast(message) {
   iziToast.success({
-    position: 'topRight',
+    position: 'center',
     theme: 'dark',
-    messageColor: 'white',
-    backgroundColor: '#4CAF50',
+    messageColor: 'green',
     message: message,
   });
 }
@@ -14,8 +13,7 @@ export function showErrorToast(message) {
   iziToast.error({
     position: 'topRight',
     theme: 'dark',
-    messageColor: 'white',
-    backgroundColor: '#ef4040',
+    messageColor: 'red',
     message: message,
   });
 }

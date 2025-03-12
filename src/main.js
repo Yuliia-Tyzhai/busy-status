@@ -40,10 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       await sendFormData(formData);
+
+      form.style.display = 'none';
+
       showSuccessToast('You have successfully sent your answers!');
-      document.getElementById('registration-container').innerHTML =
-        '<p>You have successfully sent your answers!</p>';
-      form.reset();
     } catch (error) {
       showErrorToast(
         'Error: ' +

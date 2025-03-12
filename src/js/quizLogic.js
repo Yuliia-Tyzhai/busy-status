@@ -1,4 +1,3 @@
-// src/quizLogic.js
 import { questions } from './constants';
 import { showErrorToast } from './iziToastConfig';
 
@@ -31,11 +30,11 @@ export function showQuestion() {
     option.addEventListener('click', () => {
       options.forEach(opt => opt.classList.remove('selected'));
       option.classList.add('selected');
-      handleNextQuestion(); // Викликаємо автоматично
+      handleNextQuestion();
     });
   });
 
-  updateProgress(); // Оновлюємо прогрес
+  updateProgress();
 }
 
 export function handleNextQuestion() {
