@@ -25,3 +25,10 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

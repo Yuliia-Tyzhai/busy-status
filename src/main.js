@@ -1,5 +1,5 @@
 import initIntlTelInput from './js/intlTelInput';
-import { showQuestion, handleNextQuestion, getAnswers } from './js/quizLogic';
+import { showQuestion, getAnswers } from './js/quizLogic';
 import { sendFormData } from './js/apiService';
 import { validateForm } from './js/formValidation';
 import { showSuccessToast, showErrorToast } from './js/iziToastConfig';
@@ -7,7 +7,6 @@ import intlTelInput from 'intl-tel-input';
 
 document.addEventListener('DOMContentLoaded', () => {
   showQuestion();
-  document.getElementById('next').addEventListener('click', handleNextQuestion);
   initIntlTelInput(document.querySelector('.wt-phone-input'));
 
   const form = document.querySelector('.wt-form');

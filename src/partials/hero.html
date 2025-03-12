@@ -1,5 +1,5 @@
-<section class="hero-section">
-  <div class="hero-container container">
+<section class="hero-section container">
+  <div class="text-container container">
     <h1 class="hero-title">Live Busy status</h1>
     <p class="hero-text">
       Busy Status Bar can integrate with desktop software and automatically
@@ -7,14 +7,13 @@
       certain program is active.
     </p>
   </div>
-  <div id="quiz-container">
+  <div class="quiz-container" id="quiz-container">
     <div id="quiz"></div>
-    <button id="next">Next question</button>
+    <div id="progress" class="quiz-progress"></div>
   </div>
   <div id="registration-container" style="display: none">
-    <form id="registration-form" class="wt-form">
+    <form class="wt-form" id="registration-form">
       <div class="form-group">
-        <label for="name">Name</label>
         <input
           type="text"
           id="name"
@@ -22,11 +21,11 @@
           required
           class="wt-input"
           autocomplete="name"
+          placeholder="Name"
         />
       </div>
 
       <div class="form-group">
-        <label for="email">Email</label>
         <input
           type="email"
           id="email"
@@ -34,21 +33,22 @@
           required
           class="wt-email-input"
           autocomplete="email"
+          placeholder="Email"
         />
       </div>
 
       <div class="form-group">
-        <label for="phone">Phone number</label>
         <input
           type="text"
           id="phone"
           name="phone"
           class="wt-phone-input"
           autocomplete="tel"
+          placeholder="Phone number"
         />
       </div>
 
-      <button type="submit" id="submitButton">Send</button>
+      <button class="send-button" type="submit" id="submitButton">Send</button>
     </form>
   </div>
 </section>
